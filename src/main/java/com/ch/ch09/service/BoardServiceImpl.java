@@ -12,19 +12,50 @@ public class BoardServiceImpl implements BoardService {
 	@Autowired
 	private BoardDao bd;
 
-	public List<Board> list() {
-		return bd.list();
+	@Override
+	public List<Board> list(int startRow, int endRow) {
+		return bd.list(startRow, endRow);
 	}
 
+	@Override
 	public int insert(Board board) {
 		return bd.insert(board);
 	}
 
+	@Override
 	public void updateReadCount(int num) {
 		bd.updateReadCount(num);
 	}
 
+	@Override
 	public Board select(int num) {
 		return bd.select(num);
 	}
+
+	@Override
+	public int getTotal() {
+		return bd.getTotal();
+	}
+
+	@Override
+	public int update(Board board) {
+		return bd.update(board);
+	}
+
+	@Override
+	public int delete(int num) {
+		return bd.delete(num);
+	}
+
+	@Override
+	public int maxNum() {
+		return bd.maxNum();
+	}
+
+	@Override
+	public void updateRe_step(Board board) {
+		bd.updateRe_step(board);
+
+	}
+
 }

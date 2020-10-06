@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 <script type="text/javascript">
 	$(function() {
-		$('#boardListDisp').load('list.do');
+		$('#boardListDisp').load('list.do', 'pageNum=${pageNum}'); //++
 	});
 </script>
 </head>
@@ -37,12 +37,17 @@
 				<td><pre>${board.content }</pre></td>
 			</tr>
 			<tr>
-				<td colspan="2"><a href="list.do" class="btn btn-info">게시글 목록</a>
-				<a href="updateForm.do?num=${board.num }" class="btn btn-warning">수정</a>
-				<a href="deleteForm.do?num=${board.num }" class="btn btn-danger">삭제</a>
-				<a href="insertForm.do?num=${board.num }" class="btn btn-success" >답글</a>
-				</td>
-			</tr>
+			<tr>
+				<td colspan="2"><a href="list.do?pageNum=${pageNum}"
+					class="btn btn-info">게시글 목록</a> 
+					<a href="updateForm.do?num=${board.num}&pageNum=${pageNum}"
+					class="btn btn-warning">수정</a> 
+					<a href="deleteForm.do?num=${board.num}&pageNum=${pageNum}"
+					class="btn btn-danger">삭제</a> 
+					
+					<!--nm을 쓴 이유는 원래 컬럼이 num이기 때문에 충돌날까봐 nm으로 바꿔서 사용 -->
+					<a href="insertForm.do?nm=${board.num}&pageNum=${pageNum}"
+					class="btn btn-success">답글</a>
 		</table>
 		<div id="boardListDisp"></div>
 	</div>

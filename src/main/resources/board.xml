@@ -3,26 +3,61 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="boardns">
 
-	<select id="list" resultType="board">
-		select * from board order by num desc
+	<select id="list" parameterType="map" resultType="board">
+		select * from
+		(select a.*, rownum rn from
+		                <!-- order by num desc -->
+		(select * from board order by ref desc,re_step)a )
+		where rn between #{startRow} and #{endRow}
 	</select>
-
+	
+	<select id="maxNum" resultType="integer">
+		<!-- ref와 num이 같을 수도 있고 다를 수도 있어서 따로 생성 -->
+		select nvl(max(num),0) + 1 num
+		from board
+	</select>
+	
 	<insert id="insert" parameterType="board">
-		<selectKey keyProperty="num" order="BEFORE"
-			resultType="integer">
-			select nvl(max(num),0) + 1 num from board
-		</selectKey>
+
+		<!-- <selectKey keyProperty="num" order="BEFORE" resultType="integer"> 
+			select nvl(max(num),0) + 1 num from board </selectKey> -->
 		<!-- 답변글이 아니면 num과 ref는 같은 값 -->
+
 		insert into board values(#{num},#{writer},#{subject},
-		#{content},#{email},0,#{password},#{num},#{re_step},
+		#{content},#{email},0,#{password},#{ref},#{re_step},
 		#{re_level},#{ip},sysdate,'n')
 	</insert>
-	
+
 	<update id="updateReadCount">
-		update board set readcount = readcount + 1 where num=#{num}
+		update board set readcount = readcount + 1 where
+		num=#{num}
 	</update>
 
 	<select id="select" resultType="board">
-		select * from board where num=#{num}
+		select * from board where
+		num=#{num}
 	</select>
+
+	<select id="getTotal" resultType="integer">
+		select count(*) from board
+	</select>
+
+	<update id="update" parameterType="board">
+		update board set
+		subject=#{subject}, writer=#{writer}, email=#{email},
+		content=#{content}
+		where num=#{num}
+	</update>
+
+	<!-- 실질적으로 삭제하는 것이 아니기 때문에 <delete>가 아닌 <update>로 시작한다는 점 유의해서 보기 -->
+	<update id="delete" parameterType="integer">
+		update board set del = 'y'
+		where num=#{num}
+	</update>
+
+	<update id="updateRe_step" parameterType="board">
+		update board SET
+		re_step = re_step+1
+		where ref = #{ref} and re_step > #{re_step}
+	</update>
 </mapper>

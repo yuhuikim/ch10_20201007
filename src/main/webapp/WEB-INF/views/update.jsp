@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ include file="header.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,13 +11,14 @@
 <body>
 	<c:if test="${result > 0 }">
 		<script type="text/javascript">
-			alert("입력 성공!");
-			location.href = "list.do?pageNum=${pageNum}";
+			alert("수정 성공!");
+			//location.href="list.do?pageNum=${pageNum}"; // insert.jsp는 이렇게 씀_참고하기
+			location.href = "view.do?num=${board.num}&pageNum=${pageNum}"; // ++
 		</script>
 	</c:if>
 	<c:if test="${result == 0 }">
 		<script type="text/javascript">
-			alert("입력 실패!");
+			alert("수정 실패!");
 			history.go(-1);
 		</script>
 	</c:if>
