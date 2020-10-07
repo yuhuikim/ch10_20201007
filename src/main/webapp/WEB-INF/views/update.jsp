@@ -5,20 +5,18 @@
 <html>
 <head>
 <meta charset="UTF-8">
-
 <title>Insert title here</title>
 </head>
 <body>
 	<c:if test="${result > 0 }">
 		<script type="text/javascript">
-			alert("수정 성공!");
-			//location.href="list.do?pageNum=${pageNum}"; // insert.jsp는 이렇게 씀_참고하기
-			location.href = "view.do?num=${board.num}&pageNum=${pageNum}"; // ++
+			alert("수정 성공 ㅋㅋ");
+			location.href = "${path}/view/num/${board.num}/pageNum/${pageNum}";
 		</script>
 	</c:if>
 	<c:if test="${result == 0 }">
 		<script type="text/javascript">
-			alert("수정 실패!");
+			alert("수정 실패  ! 에궁");
 			history.go(-1);
 		</script>
 	</c:if>

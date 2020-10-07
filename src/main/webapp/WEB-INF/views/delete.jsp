@@ -5,20 +5,18 @@
 <html>
 <head>
 <meta charset="UTF-8">
-
 <title>Insert title here</title>
 </head>
 <body>
 	<c:if test="${result > 0 }">
 		<script type="text/javascript">
-			alert("삭제 성공!");
-			location.href = "list.do?pageNum=${pageNum}";
+			alert("삭제 되었습니다");
+			location.href = "${path}/list/pageNum/${pageNum}";
 		</script>
 	</c:if>
-
 	<c:if test="${result == 0 }">
 		<script type="text/javascript">
-			alert("삭제 실패!");
+			alert("에궁 ! 실패 ㅠㅠ");
 			history.go(-1);
 		</script>
 	</c:if>

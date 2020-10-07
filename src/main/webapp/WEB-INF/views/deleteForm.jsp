@@ -20,10 +20,10 @@
 <body>
 	<div class="container">
 		<h2>암호 확인</h2>
-		<form action="delete.do" name="frm" onsubmit="return chk()">
-		    <input type="hidden" name="num" value="${board.num }"/> 
-            <input type="hidden" name="password" value="${board.password}"/> 
-            <input type="hidden" name="pageNum" value="${pageNum}"/>
+		<form action="${path}/delete" name="frm" onsubmit="return chk()">
+			<input type="hidden" name="num" value="${board.num }"> <input
+				type="hidden" name="password" value="${board.password }"> <input
+				type="hidden" name="pageNum" value="${pageNum }">
 			<table class="table table-bordered">
 				<tr>
 					<td>암호</td>

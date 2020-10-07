@@ -10,8 +10,7 @@
 </head>
 <body>
 	<script type="text/javascript">
-		location.href = "list.do";
-		//location.href = "insertBoard.do";
+		location.href = "list";
 	</script>
 </body>
 </html>
